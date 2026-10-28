@@ -12,5 +12,6 @@
   "language": "en",
   "noConfigSearch": true,
   "words": ["megalinter", "oxsecurity"],
+  "dictionaries": ["cpp-compound-words", "en-gb", "python"],
   "version": "0.2"
 }
