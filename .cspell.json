@@ -8,6 +8,7 @@
     "megalinter",
     "package-lock.json",
     "report",
+    ".devcontainer/devcontainer.json",
     ".devcontainer/devcontainer-lock.json",
     ".gitignore",
     "infra/abbreviations.json",
@@ -26,6 +27,8 @@
     "bicepparam",
     "eastus",
     "froyo",
+    "mcollier",
+    "mcpserverconfigs",
     "megalinter",
     "oxsecurity"
   ],
