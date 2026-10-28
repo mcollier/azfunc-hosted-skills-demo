@@ -22,6 +22,8 @@ DISABLE:
   - COPYPASTE # Comment to enable checks of excessive copy-pastes
   # - SPELL # Uncomment to disable checks of spelling mistakes
 
+PYTHON_FLAKE8_ARGUMENTS: "--max-line-length=120"
+
 SHOW_ELAPSED_TIME: true
 
 # Uncomment if you want MegaLinter to detect errors but not block CI to pass
