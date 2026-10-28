@@ -11,13 +11,13 @@ Markdown fences, no commentary before or after it.
 
 ## Inputs you need
 
-| Input | Required | Notes |
-| --- | --- | --- |
-| Customer first name | yes | Greet by first name. Fall back to "there" if missing. |
-| Order number | yes | Show verbatim, e.g. `ORD-2002`. |
-| Line items | yes | Each needs product name, requested qty, available (in stock) qty, fillable qty, shortfall qty. |
-| Coupon code + discount percent | only if issued | Omit the whole coupon block when no coupon exists. |
-| Alternative recommendations | optional | Only include when a shortfall exists. |
+| Input                          | Required       | Notes                                                                                          |
+| ------------------------------ | -------------- | ---------------------------------------------------------------------------------------------- |
+| Customer first name            | yes            | Greet by first name. Fall back to "there" if missing.                                          |
+| Order number                   | yes            | Show verbatim, e.g. `ORD-2002`.                                                                |
+| Line items                     | yes            | Each needs product name, requested qty, available (in stock) qty, fillable qty, shortfall qty. |
+| Coupon code + discount percent | only if issued | Omit the whole coupon block when no coupon exists.                                             |
+| Alternative recommendations    | optional       | Only include when a shortfall exists.                                                          |
 
 Never invent inventory numbers, product names, or coupon codes. Use only values
 supplied by tool output or the order payload. Derive nothing the caller did not
@@ -52,15 +52,15 @@ Email clients strip `<style>` blocks and ignore flexbox/grid, so:
 
 ### Brand palette
 
-| Role | Hex | Use |
-| --- | --- | --- |
-| Berry pink | `#FF5FA2` | Header band, coupon border, headings |
-| Mint | `#3FD9C4` | Accents, table header row |
-| Cream | `#FFF8F2` | Page background |
-| Swirl white | `#FFFFFF` | Card background |
-| Deep cocoa | `#3B2A2F` | Body text |
-| Shortfall amber | `#B06A00` | Non-zero shortfall numbers |
-| Good green | `#1F8A4C` | Zero-shortfall / fully filled numbers |
+| Role            | Hex       | Use                                   |
+| --------------- | --------- | ------------------------------------- |
+| Berry pink      | `#FF5FA2` | Header band, coupon border, headings  |
+| Mint            | `#3FD9C4` | Accents, table header row             |
+| Cream           | `#FFF8F2` | Page background                       |
+| Swirl white     | `#FFFFFF` | Card background                       |
+| Deep cocoa      | `#3B2A2F` | Body text                             |
+| Shortfall amber | `#B06A00` | Non-zero shortfall numbers            |
+| Good green      | `#1F8A4C` | Zero-shortfall / fully filled numbers |
 
 ## Required structure
 
