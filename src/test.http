@@ -1,0 +1,38 @@
+### Dad joke agent
+POST http://localhost:7071/agents/dad_joke/chat HTTP/1.1
+Content-Type: application/json
+
+{
+  "prompt": "tell me a joke about software engineering"
+}
+
+### Order Fulfillment — fully fulfillable
+# VNE (120 on hand) and JVJ (65 on hand) both cover the requested qty.
+# Expect: canFullyFulfill = true, shouldGenerateCoupon = false, coupon = null.
+POST http://localhost:7071/agents/daily_orders/chat HTTP/1.1
+Content-Type: application/json
+
+{
+  "prompt": "{\"orderId\":\"ORD-1001\",\"customer\":{\"firstName\":\"Ada\",\"lastName\":\"Lovelace\",\"email\":\"ada.lovelace@froyofoundry.example\"},\"items\":[{\"requestedQty\":4,\"flavorId\":\"VNE\"},{\"requestedQty\":2,\"flavorId\":\"JVJ\"}]}"
+}
+
+### Order Fulfillment — partially fulfillable
+# RRB (42) is fine, BBB has only 7 of the 12 requested, and NPP is out of stock (0).
+# Expect: canFullyFulfill = false, shouldGenerateCoupon = true, a 25% coupon,
+# and nutty/berry alternative recommendations.
+POST http://localhost:7071/agents/daily_orders/chat HTTP/1.1
+Content-Type: application/json
+
+{
+  "prompt": "{\"orderId\":\"ORD-1002\",\"customer\":{\"firstName\":\"Grace\",\"lastName\":\"Hopper\",\"email\":\"grace.hopper@froyofoundry.example\"},\"items\":[{\"requestedQty\":3,\"flavorId\":\"RRB\"},{\"requestedQty\":12,\"flavorId\":\"BBB\"},{\"requestedQty\":2,\"flavorId\":\"NPP\"}]}"
+}
+
+### Order Fulfillment — nothing in stock
+# Both CKC and NPP are hardcoded at 0.
+# Expect: every item has shortfall, coupon issued, alternatives recommended.
+POST http://localhost:7071/agents/daily_orders/chat HTTP/1.1
+Content-Type: application/json
+
+{
+  "prompt": "{\"orderId\":\"ORD-1003\",\"customer\":{\"firstName\":\"Alan\",\"lastName\":\"Turing\",\"email\":\"alan.turing@froyofoundry.example\"},\"items\":[{\"requestedQty\":5,\"flavorId\":\"CKC\"},{\"requestedQty\":1,\"flavorId\":\"NPP\"}]}"
+}

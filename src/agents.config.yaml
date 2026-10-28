@@ -1,0 +1,3 @@
+# Default runtime configuration
+timeout: 900
+model: $FOUNDRY_MODEL

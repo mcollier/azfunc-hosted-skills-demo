@@ -1,0 +1,26 @@
+# Ruff configuration: https://docs.astral.sh/ruff/configuration/
+#
+# The rule set is pinned explicitly so that lint results stay stable across
+# Ruff releases (default rule sets change between versions).
+
+target-version = "py313"
+line-length = 120
+
+exclude = [
+    ".venv",
+    "src/.venv",
+    "__pycache__",
+]
+
+[lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort (import ordering)
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "EXE",  # flake8-executable
+    "FURB", # refurb (modern idioms)
+]
