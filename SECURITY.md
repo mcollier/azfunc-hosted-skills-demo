@@ -4,7 +4,7 @@
 
 Please do **not** open a public GitHub issue for security vulnerabilities.
 
-Instead, please report them to: **no-reply@email.com**
+Instead, please report them to: `no-reply@email.com`
 
 Include the following in your report:
 

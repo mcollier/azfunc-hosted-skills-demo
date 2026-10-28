@@ -19,7 +19,16 @@
   ],
   "language": "en",
   "noConfigSearch": true,
-  "words": ["megalinter", "oxsecurity"],
-  "dictionaries": ["cpp-compound-words", "en-gb", "python"],
+  "words": [
+    "acai",
+    "azfunc",
+    "azurefunctions",
+    "bicepparam",
+    "eastus",
+    "froyo",
+    "megalinter",
+    "oxsecurity"
+  ],
+  "dictionaries": ["cpp-compound-words", "en-gb", "fonts", "python"],
   "version": "0.2"
 }
