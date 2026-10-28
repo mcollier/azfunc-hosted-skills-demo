@@ -4,7 +4,7 @@
 # linters documentation
 ---
 # MegaLinter Docker image flavor and version, used by mega-linter-runner and coding agents
-MEGALINTER_FLAVOR: all
+MEGALINTER_FLAVOR: python
 MEGALINTER_VERSION: v10
 
 # all, none, or list of linter keys
