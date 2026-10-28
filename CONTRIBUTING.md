@@ -12,20 +12,26 @@ By participating, you are expected to uphold this code.
 
 1. Fork the repository
 2. Clone your fork:
+
    ```sh
    git clone https://github.com/YOUR-USERNAME/azfunc-hosted-skills-demo.git
    cd azfunc-hosted-skills-demo
    ```
+
 3. Create a branch:
+
    ```sh
    git checkout -b feat/my-feature
    ```
+
 4. Install dependencies:
+
    ```sh
    python -m venv src/.venv
    source src/.venv/bin/activate
    pip install -r src/requirements.txt
    ```
+
    Or open the repo in VS Code and choose **Reopen in Container** to use the
    devcontainer, which provisions Python, Azure CLI, Bicep, Azure Functions
    Core Tools, and Azurite for you.
@@ -35,6 +41,7 @@ By participating, you are expected to uphold this code.
    which holds environment-specific deployment values.
 6. Make your changes
 7. Verify locally:
+
    ```sh
    cd src && func start                       # agents start without errors
    ruff check src                             # lint is clean
@@ -45,7 +52,7 @@ By participating, you are expected to uphold this code.
 ## Project Layout
 
 | Path                     | What lives here                                               |
-| ------------------------ | ------------------------------------------------------------- |
+|--------------------------|---------------------------------------------------------------|
 | `src/*.agent.md`         | Agent definitions: YAML front matter + system prompt          |
 | `src/agents.config.yaml` | Shared runtime configuration                                  |
 | `src/tools/`             | Python tools callable by agents (register in `_catalog.py`)   |
