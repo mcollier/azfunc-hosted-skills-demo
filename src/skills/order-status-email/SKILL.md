@@ -85,42 +85,117 @@ the coupon and alternatives blocks entirely when they do not apply.
 <!DOCTYPE html>
 <html>
   <body style="margin:0; padding:0; background-color:#FFF8F2;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#FFF8F2; padding:24px 12px;">
+    <table
+      role="presentation"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background-color:#FFF8F2; padding:24px 12px;"
+    >
       <tr>
         <td align="center">
-          <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px; width:100%; background-color:#FFFFFF; border-radius:12px; overflow:hidden; font-family:'Trebuchet MS','Segoe UI',Helvetica,Arial,sans-serif; color:#3B2A2F;">
-
+          <table
+            role="presentation"
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            style="max-width:600px; width:100%; background-color:#FFFFFF; border-radius:12px; overflow:hidden; font-family:'Trebuchet MS','Segoe UI',Helvetica,Arial,sans-serif; color:#3B2A2F;"
+          >
             <tr>
-              <td style="background-color:#FF5FA2; padding:20px 24px; color:#FFFFFF; font-size:22px; font-weight:bold; letter-spacing:0.5px;">
+              <td
+                style="background-color:#FF5FA2; padding:20px 24px; color:#FFFFFF; font-size:22px; font-weight:bold; letter-spacing:0.5px;"
+              >
                 Froyo Foundry
               </td>
             </tr>
 
             <tr>
               <td style="padding:24px 24px 8px 24px;">
-                <p style="margin:0 0 12px 0; font-size:18px;">Hi {{firstName}},</p>
-                <p style="margin:0 0 12px 0; font-size:15px; line-height:22px;">{{statusSentence}}</p>
-                <p style="margin:0 0 4px 0; font-size:15px;">Order <strong style="color:#FF5FA2;">{{orderId}}</strong></p>
+                <p style="margin:0 0 12px 0; font-size:18px;">
+                  Hi {{firstName}},
+                </p>
+                <p style="margin:0 0 12px 0; font-size:15px; line-height:22px;">
+                  {{statusSentence}}
+                </p>
+                <p style="margin:0 0 4px 0; font-size:15px;">
+                  Order <strong style="color:#FF5FA2;">{{orderId}}</strong>
+                </p>
               </td>
             </tr>
 
             <tr>
               <td style="padding:8px 24px 16px 24px;">
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse; font-size:14px;">
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="border-collapse:collapse; font-size:14px;"
+                >
                   <tr style="background-color:#3FD9C4; color:#1A3C38;">
-                    <th align="left"  style="padding:10px 12px; border:1px solid #BEEFE8;">Flavor</th>
-                    <th align="right" style="padding:10px 12px; border:1px solid #BEEFE8;">Requested</th>
-                    <th align="right" style="padding:10px 12px; border:1px solid #BEEFE8;">In stock</th>
-                    <th align="right" style="padding:10px 12px; border:1px solid #BEEFE8;">We can fill</th>
-                    <th align="right" style="padding:10px 12px; border:1px solid #BEEFE8;">Shortfall</th>
+                    <th
+                      align="left"
+                      style="padding:10px 12px; border:1px solid #BEEFE8;"
+                    >
+                      Flavor
+                    </th>
+                    <th
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #BEEFE8;"
+                    >
+                      Requested
+                    </th>
+                    <th
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #BEEFE8;"
+                    >
+                      In stock
+                    </th>
+                    <th
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #BEEFE8;"
+                    >
+                      We can fill
+                    </th>
+                    <th
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #BEEFE8;"
+                    >
+                      Shortfall
+                    </th>
                   </tr>
                   <!-- repeat one row per line item -->
                   <tr>
-                    <td align="left"  style="padding:10px 12px; border:1px solid #EFE2DA;">{{productName}}</td>
-                    <td align="right" style="padding:10px 12px; border:1px solid #EFE2DA;">{{requestedQty}}</td>
-                    <td align="right" style="padding:10px 12px; border:1px solid #EFE2DA;">{{availableQty}}</td>
-                    <td align="right" style="padding:10px 12px; border:1px solid #EFE2DA;">{{fillableQty}}</td>
-                    <td align="right" style="padding:10px 12px; border:1px solid #EFE2DA; color:{{#1F8A4C when 0, #B06A00 when > 0}}; font-weight:bold;">{{shortfallQty}}</td>
+                    <td
+                      align="left"
+                      style="padding:10px 12px; border:1px solid #EFE2DA;"
+                    >
+                      {{productName}}
+                    </td>
+                    <td
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #EFE2DA;"
+                    >
+                      {{requestedQty}}
+                    </td>
+                    <td
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #EFE2DA;"
+                    >
+                      {{availableQty}}
+                    </td>
+                    <td
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #EFE2DA;"
+                    >
+                      {{fillableQty}}
+                    </td>
+                    <td
+                      align="right"
+                      style="padding:10px 12px; border:1px solid #EFE2DA; color:{{#1F8A4C when 0, #B06A00 when > 0}}; font-weight:bold;"
+                    >
+                      {{shortfallQty}}
+                    </td>
                   </tr>
                 </table>
               </td>
@@ -129,12 +204,29 @@ the coupon and alternatives blocks entirely when they do not apply.
             <!-- coupon block: include ONLY when a coupon was issued -->
             <tr>
               <td style="padding:8px 24px 16px 24px;">
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:3px dashed #FF5FA2; border-radius:12px; background-color:#FFF0F6;">
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  style="border:3px dashed #FF5FA2; border-radius:12px; background-color:#FFF0F6;"
+                >
                   <tr>
                     <td align="center" style="padding:18px 16px;">
-                      <p style="margin:0 0 6px 0; font-size:14px; text-transform:uppercase; letter-spacing:1px; color:#B2185E;">Here's {{discountPercent}}% off your next tub</p>
-                      <p style="margin:0 0 6px 0; font-family:'Courier New',Courier,monospace; font-size:28px; font-weight:bold; color:#FF5FA2;">{{couponCode}}</p>
-                      <p style="margin:0; font-size:12px; color:#7A5A63;">Use it at checkout — our way of saying thanks for your patience.</p>
+                      <p
+                        style="margin:0 0 6px 0; font-size:14px; text-transform:uppercase; letter-spacing:1px; color:#B2185E;"
+                      >
+                        Here's {{discountPercent}}% off your next tub
+                      </p>
+                      <p
+                        style="margin:0 0 6px 0; font-family:'Courier New',Courier,monospace; font-size:28px; font-weight:bold; color:#FF5FA2;"
+                      >
+                        {{couponCode}}
+                      </p>
+                      <p style="margin:0; font-size:12px; color:#7A5A63;">
+                        Use it at checkout — our way of saying thanks for your
+                        patience.
+                      </p>
                     </td>
                   </tr>
                 </table>
@@ -143,20 +235,27 @@ the coupon and alternatives blocks entirely when they do not apply.
 
             <!-- alternatives block: include ONLY when there is a shortfall -->
             <tr>
-              <td style="padding:0 24px 16px 24px; font-size:14px; line-height:22px;">
-                <p style="margin:0 0 6px 0; font-weight:bold; color:#FF5FA2;">Scooped and ready right now</p>
+              <td
+                style="padding:0 24px 16px 24px; font-size:14px; line-height:22px;"
+              >
+                <p style="margin:0 0 6px 0; font-weight:bold; color:#FF5FA2;">
+                  Scooped and ready right now
+                </p>
                 <ul style="margin:0; padding-left:20px;">
-                  <li style="margin-bottom:4px;">{{altProductName}} — {{altDescription}}</li>
+                  <li style="margin-bottom:4px;">
+                    {{altProductName}} — {{altDescription}}
+                  </li>
                 </ul>
               </td>
             </tr>
 
             <tr>
-              <td style="padding:16px 24px 24px 24px; border-top:1px solid #F2E4DC; font-size:12px; color:#8A7279;">
+              <td
+                style="padding:16px 24px 24px 24px; border-top:1px solid #F2E4DC; font-size:12px; color:#8A7279;"
+              >
                 Stay swirly,<br />The Froyo Foundry crew
               </td>
             </tr>
-
           </table>
         </td>
       </tr>

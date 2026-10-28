@@ -1,0 +1,11 @@
+{
+  "name": "azfunc-hosted-skills-demo",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  }
+}

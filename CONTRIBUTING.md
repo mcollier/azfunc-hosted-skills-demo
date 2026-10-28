@@ -39,6 +39,7 @@ By participating, you are expected to uphold this code.
    cd src && func start                       # agents start without errors
    ruff check src                             # lint is clean
    az bicep build --file infra/main.bicep     # infra still compiles
+   npm install && npm run format:check        # Markdown/YAML/JSON formatting (npm run format to fix)
    ```
 
 ## Project Layout
