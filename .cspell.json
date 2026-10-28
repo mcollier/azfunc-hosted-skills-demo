@@ -9,6 +9,7 @@
     "**/megalinter-reports/**",
     "**/mega-linter-reports/**",
     "**/*.sarif",
+    "**/*megalinter_file_names_cspell.txt",
     "package-lock.json",
     "report",
     ".devcontainer/devcontainer.json",
