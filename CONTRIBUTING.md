@@ -35,6 +35,7 @@ By participating, you are expected to uphold this code.
    Or open the repo in VS Code and choose **Reopen in Container** to use the
    devcontainer, which provisions Python, Azure CLI, Bicep, Azure Functions
    Core Tools, and Azurite for you.
+
 5. Configure `src/local.settings.json` as described in the
    [README](README.md#2-configure-local-settings). This file is git-ignored
    and must never be committed. The same applies to `infra/main.bicepparam`,
@@ -52,7 +53,7 @@ By participating, you are expected to uphold this code.
 ## Project Layout
 
 | Path                     | What lives here                                               |
-|--------------------------|---------------------------------------------------------------|
+| ------------------------ | ------------------------------------------------------------- |
 | `src/*.agent.md`         | Agent definitions: YAML front matter + system prompt          |
 | `src/agents.config.yaml` | Shared runtime configuration                                  |
 | `src/tools/`             | Python tools callable by agents (register in `_catalog.py`)   |

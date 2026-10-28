@@ -23,7 +23,7 @@ We will credit reporters in release notes unless you prefer to remain anonymous.
 <!-- Update this table as versions are released -->
 
 | Version | Supported |
-|---------|-----------|
+| ------- | --------- |
 | latest  | Yes       |
 
 ## Disclosure Policy
