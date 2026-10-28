@@ -8,5 +8,8 @@
   },
   "devDependencies": {
     "prettier": "3.9.10"
+  },
+  "dependencies": {
+    "markdown-table-formatter": "^1.7.0"
   }
 }
