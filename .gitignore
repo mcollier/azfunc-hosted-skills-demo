@@ -70,3 +70,5 @@ infra/main.bicepparam
 # Samples not yet published
 /samples/
 core-tools-bug-report.md
+megalinter-reports/
+*.megalinter-setup.bak
