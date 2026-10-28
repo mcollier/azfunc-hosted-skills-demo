@@ -36,7 +36,8 @@
     "mcpserverconfigs",
     "megalinter",
     "passionfruit",
-    "oxsecurity"
+    "oxsecurity",
+    "sarif"
   ],
   "dictionaries": ["cpp-compound-words", "en-gb", "fonts", "python"],
   "version": "0.2"
