@@ -30,7 +30,7 @@ DISABLE_LINTERS:
   - YAML_V8R
   - PYTHON_MYPY
   - PYTHON_PYRIGHT
-  - PYTHON_PYLINT 
+  - PYTHON_PYLINT
 
 DISABLE:
   - COPYPASTE # Comment to enable checks of excessive copy-pastes
