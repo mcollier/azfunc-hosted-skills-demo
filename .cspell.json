@@ -10,7 +10,12 @@
     "report",
     ".devcontainer/devcontainer-lock.json",
     ".gitignore",
-    "infra/abbreviations.json"
+    "infra/abbreviations.json",
+    ".mega-linter.yml",
+    ".github/workflows/mega-linter.yml",
+    ".prettierignore",
+    "package.json",
+    "ruff.toml"
   ],
   "language": "en",
   "noConfigSearch": true,

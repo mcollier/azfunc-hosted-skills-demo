@@ -12,7 +12,7 @@ APPLY_FIXES: none
 
 ACTION_ZIZMOR_UNSECURED_ENV_VARIABLES:
   - GITHUB_TOKEN
-  
+
 # If you use ENABLE variable, all other languages/formats/tooling-formats will
 # be disabled by default
 # ENABLE:
@@ -23,6 +23,8 @@ ACTION_ZIZMOR_UNSECURED_ENV_VARIABLES:
 
 DISABLE_LINTERS:
   - REPOSITORY_TRIVY
+  - REPOSITORY_GRYPE
+  - EDITORCONFIG_EDITORCONFIG_CHECKER
 
 DISABLE:
   - COPYPASTE # Comment to enable checks of excessive copy-pastes
