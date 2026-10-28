@@ -1,0 +1,7 @@
+# Markdownlint configuration file
+
+# MD041/first-line-heading/first-line-h1 : First line in a file should be a top-level heading : https://github.com/DavidAnson/markdownlint/blob/v0.42.0/doc/md041.md
+MD041:
+  # Allow content before the first heading
+  allow_preamble: true
+  front_matter_title: ""
