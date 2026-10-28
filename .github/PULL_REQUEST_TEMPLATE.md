@@ -1,5 +1,4 @@
 <!--markdownlint-disable-next-line MD041 -->
-
 ## Description
 
 <!-- Describe your changes and the motivation behind them -->

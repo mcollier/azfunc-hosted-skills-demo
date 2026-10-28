@@ -3,7 +3,7 @@
 # The rule set is pinned explicitly so that lint results stay stable across
 # Ruff releases (default rule sets change between versions).
 
-target-version = "py313"
+target-version = "py314"
 line-length = 120
 
 exclude = [

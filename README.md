@@ -33,8 +33,7 @@ Supporting pieces:
 
 ## Prerequisites
 
-- Python 3.13 or later (`azurefunctions-agents-runtime` requires >= 3.13; the
-  devcontainer uses 3.14)
+- Python 3.14 (the devcontainer uses 3.14)
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) with Bicep
 - An Azure subscription with a Microsoft Foundry project and a deployed model
