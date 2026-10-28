@@ -12,7 +12,7 @@ Markdown fences, no commentary before or after it.
 ## Inputs you need
 
 | Input                          | Required       | Notes                                                                                          |
-| ------------------------------ | -------------- | ---------------------------------------------------------------------------------------------- |
+|--------------------------------|----------------|------------------------------------------------------------------------------------------------|
 | Customer first name            | yes            | Greet by first name. Fall back to "there" if missing.                                          |
 | Order number                   | yes            | Show verbatim, e.g. `ORD-2002`.                                                                |
 | Line items                     | yes            | Each needs product name, requested qty, available (in stock) qty, fillable qty, shortfall qty. |
@@ -53,7 +53,7 @@ Email clients strip `<style>` blocks and ignore flexbox/grid, so:
 ### Brand palette
 
 | Role            | Hex       | Use                                   |
-| --------------- | --------- | ------------------------------------- |
+|-----------------|-----------|---------------------------------------|
 | Berry pink      | `#FF5FA2` | Header band, coupon border, headings  |
 | Mint            | `#3FD9C4` | Accents, table header row             |
 | Cream           | `#FFF8F2` | Page background                       |
