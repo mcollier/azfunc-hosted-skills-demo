@@ -14,32 +14,32 @@ triggers, Python tools, MCP servers, and reusable skills — from a three-line
 The demo models **Froyo Foundry**, a fictional frozen yogurt company, and ships
 three agents:
 
-| Agent | File | Trigger | What it does |
-| --- | --- | --- | --- |
-| My Agent | `src/main.agent.md` | HTTP chat | Minimal "hello world" agent |
-| Daily Dad Joke | `src/dad-joke.agent.md` | HTTP chat + debug UI | Tells dad jokes |
+| Agent                            | File                        | Trigger                            | What it does                                                                                    |
+| -------------------------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
+| My Agent                         | `src/main.agent.md`         | HTTP chat                          | Minimal "hello world" agent                                                                     |
+| Daily Dad Joke                   | `src/dad-joke.agent.md`     | HTTP chat + debug UI               | Tells dad jokes                                                                                 |
 | Order Fulfillment Decision Agent | `src/daily-orders.agent.md` | `inbound-orders` Service Bus queue | Checks inventory, issues coupons on shortfall, recommends alternatives, and emails the customer |
 
 Supporting pieces:
 
-| Path | Purpose |
-| --- | --- |
-| `src/agents.config.yaml` | Shared runtime config (model, timeout) |
-| `src/tools/` | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code` |
-| `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email |
-| `src/mcp.json` | Office 365 Outlook MCP server used to send the email |
-| `src/test.http` | Ready-to-run requests for the HTTP agents |
-| `infra/` | Bicep templates for the Azure resources (incl. the O365 connector gateway) |
+| Path                                     | Purpose                                                                                            |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `src/agents.config.yaml`                 | Shared runtime config (model, timeout)                                                             |
+| `src/tools/`                             | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code` |
+| `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email                                    |
+| `src/mcp.json`                           | Office 365 Outlook MCP server used to send the email                                               |
+| `src/test.http`                          | Ready-to-run requests for the HTTP agents                                                          |
+| `infra/`                                 | Bicep templates for the Azure resources (incl. the O365 connector gateway)                         |
 
 ## Prerequisites
 
-- Python 3.13 or later (`azurefunctions-agents-runtime` requires >= 3.13; the
-  devcontainer uses 3.14)
+- Python 3.14 (the devcontainer uses 3.14)
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) with Bicep
 - An Azure subscription with a Microsoft Foundry project and a deployed model
 - An Azure Service Bus namespace with an `inbound-orders` queue (for the order agent)
-- [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite) for local storage emulation
+- [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite)
+  for local storage emulation
 
 > The included devcontainer (`.devcontainer/`) installs all of the above. Open
 > the repo in VS Code and choose **Reopen in Container** to skip manual setup.

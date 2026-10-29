@@ -1,0 +1,12 @@
+node_modules/
+__azurite*
+__blobstorage__/
+__queuestorage__/
+.ruff_cache/
+__pycache__/
+.venv/
+infra/
+*.py
+CHANGELOG.md
+LICENSE
+package-lock.json

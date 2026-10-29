@@ -6,6 +6,3 @@ contact_links:
   - name: Microsoft Foundry documentation
     url: https://learn.microsoft.com/azure/ai-foundry/
     about: Product documentation for Microsoft Foundry models and agents.
-  - name: Questions and discussion
-    url: https://github.com/Azure/azure-functions-host/discussions
-    about: Ask general Azure Functions questions here rather than in this demo repo.
