@@ -29,8 +29,10 @@
       "extensions": [
         "azurite.azurite@3.35.0",
         "codezombiech.gitignore",
+        "esbenp.prettier-vscode",
         "github.vscode-github-actions",
         "humao.rest-client",
+        "ms-python.black-formatter",
         "ms-python.python",
         "ms-azuretools.vscode-azure-github-copilot",
         "ms-azuretools.vscode-bicep",
