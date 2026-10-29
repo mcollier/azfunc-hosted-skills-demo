@@ -53,7 +53,7 @@ By participating, you are expected to uphold this code.
 ## Project Layout
 
 | Path                     | What lives here                                               |
-|--------------------------|---------------------------------------------------------------|
+| ------------------------ | ------------------------------------------------------------- |
 | `src/*.agent.md`         | Agent definitions: YAML front matter + system prompt          |
 | `src/agents.config.yaml` | Shared runtime configuration                                  |
 | `src/tools/`             | Python tools callable by agents (register in `_catalog.py`)   |
