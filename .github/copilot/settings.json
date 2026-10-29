@@ -1,13 +1,13 @@
 {
-    "extraKnownMarketplaces":{
-        "azure-skills": {
-            "source": {
-                "source": "github",
-                "repo": "microsoft/azure-skills"
-            }
-        }
-    },
-    "enabledPlugins":{
-        "azure@azure-skills": true
+  "extraKnownMarketplaces": {
+    "azure-skills": {
+      "source": {
+        "source": "github",
+        "repo": "microsoft/azure-skills"
+      }
     }
+  },
+  "enabledPlugins": {
+    "azure@azure-skills": true
+  }
 }

@@ -13,7 +13,9 @@ except ImportError:  # loaded as a top-level module rather than a package member
 
 
 @tool
-def get_available_inventory(profile_tag: str = "", min_qty: int = 1) -> list[dict[str, Any]]:
+def get_available_inventory(
+    profile_tag: str = "", min_qty: int = 1
+) -> list[dict[str, Any]]:
     """List flavors that are currently in stock, optionally filtered by flavor profile.
 
     Use this to recommend substitutes for line items that cannot be fulfilled.

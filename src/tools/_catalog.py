@@ -66,10 +66,10 @@ FLAVORS: dict[str, dict[str, Any]] = {
         "profile": ["caramel", "sweet", "creamy"],
         "availableQty": 9,
     },
-    "ACB": {
-        "productName": "AIçaí Bowl",
-        "description": "Açaí superfruit blend topped with granola, trained on pure antioxidants.",
-        "profile": ["fruity", "acai", "superfood", "tart"],
+    "GMG": {
+        "productName": "Git Merge Mango",
+        "description": "Sunny mango froyo swirled with passionfruit, resolving every conflict into sweetness.",
+        "profile": ["fruity", "mango", "tropical", "tangy"],
         "availableQty": 55,
     },
 }
