@@ -8,6 +8,19 @@
         "scope": "https://apihub.azure.com/.default",
         "client_id": "$O365_MCP_CLIENT_ID"
       }
+    },
+    "azure-maps": {
+      "type": "http",
+      "url": "$AZURE_MAPS_MCP_SERVER_URL",
+      "tools": [
+        "azuremaps_GetLocationByAddress",
+        "azuremaps_GetLocationByPoint",
+        "azuremaps_GetRoute",
+        "azuremaps_GetMap"
+      ],
+      "headers": {
+        "X-API-Key": "$AZURE_MAPS_API_KEY"
+      }
     }
   }
 }

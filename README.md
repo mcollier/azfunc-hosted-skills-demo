@@ -12,20 +12,26 @@ triggers, Python tools, MCP servers, and reusable skills — from a three-line
 ## What's in here
 
 The demo models **Froyo Foundry**, a fictional frozen yogurt company, and ships
-three agents:
+four agents:
 
 | Agent                            | File                        | Trigger                            | What it does                                                                                    |
 | -------------------------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
 | My Agent                         | `src/main.agent.md`         | HTTP chat                          | Minimal "hello world" agent                                                                     |
 | Daily Dad Joke                   | `src/dad-joke.agent.md`     | HTTP chat + debug UI               | Tells dad jokes                                                                                 |
 | Order Fulfillment Decision Agent | `src/daily-orders.agent.md` | `inbound-orders` Service Bus queue | Checks inventory, issues coupons on shortfall, recommends alternatives, and emails the customer |
+| Franchisee Analysis (workflow)   | `src/franchisee-analysis.agent.md` | Blob in `applications/` container | Plans a durable dynamic workflow that profiles the applicant, checks financials, writes an HTML assessment, and emails it |
+
+The franchisee workflow uses internal-only subagents in `src/agents/`
+(`applicant_profiler`, `financial_analyst`, `assessment_writer`,
+`assessment_mailer`) and the `read_application_blob` workflow tool.
 
 Supporting pieces:
 
 | Path                                     | Purpose                                                                                            |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `src/agents.config.yaml`                 | Shared runtime config (model, timeout)                                                             |
-| `src/tools/`                             | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code` |
+| `src/tools/`                             | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code`, `check_financials`, `read_blob` / `read_application_blob` (workflow tool) |
+| `src/agents/`                            | Workflow subagents used by the franchisee analysis agent                                           |
 | `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email                                    |
 | `src/mcp.json`                           | Office 365 Outlook MCP server used to send the email                                               |
 | `src/test.http`                          | Ready-to-run requests for the HTTP agents                                                          |
@@ -128,6 +134,29 @@ recommendations. Stock levels come from the hardcoded catalog in
 
 Whatever publishes the message needs the **Azure Service Bus Data Sender** role
 on the namespace (or queue).
+
+### 5. Exercise the franchisee analysis workflow
+
+The franchisee agent uses [dynamic workflows](https://learn.microsoft.com/azure/azure-functions/functions-hosted-skills-dynamic-workflows),
+which require a Durable Task Scheduler. Locally, run the emulator and add
+`TASKHUB_NAME` and `DURABLE_TASK_SCHEDULER_CONNECTION_STRING` to
+`local.settings.json`:
+
+```bash
+docker run -d -p 8080:8080 -p 8082:8082 mcr.microsoft.com/dts/dts-emulator:latest
+```
+
+With Azurite and `func start` running, upload the sample application:
+
+```bash
+az storage container create -n applications --connection-string UseDevelopmentStorage=true
+az storage blob upload -c applications -n application.md -f samples/application.md \
+  --connection-string UseDevelopmentStorage=true --overwrite
+```
+
+The agent starts one workflow: `read_application` → (`profile_applicant` ∥
+`analyze_financials`) → `write_assessment` → `send_assessment`. Track it in the
+DTS dashboard at <http://localhost:8082>.
 
 ## Deploying to Azure
 
