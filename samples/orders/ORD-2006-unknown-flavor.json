@@ -1,0 +1,12 @@
+{
+  "orderId": "ORD-2006",
+  "customer": {
+    "firstName": "Barbara",
+    "lastName": "Liskov",
+    "email": "michael.collier@live.com"
+  },
+  "items": [
+    { "requestedQty": 2, "flavorId": "ZZZ" },
+    { "requestedQty": 3, "flavorId": "PBP" }
+  ]
+}
