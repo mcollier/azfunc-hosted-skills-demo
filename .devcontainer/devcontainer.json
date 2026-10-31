@@ -3,12 +3,16 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {
-      "version": "2.91.0",
+      "version": "latest",
       "installBicep": true
+    },
+     "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest",
+      "extensions": ["github/gh-aw"]
     },
     "ghcr.io/stuartleeks/dev-container-features/github-copilot-cli:0": {},
     "ghcr.io/azure/azure-dev/azd:latest": {
-      "version": "1.37.1"
+      "version": "latest"
     },
     "ghcr.io/devcontainers/features/copilot-cli:1": {
       "version": "latest"
