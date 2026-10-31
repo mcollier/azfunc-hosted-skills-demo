@@ -1,11 +1,12 @@
 targetScope = 'subscription'
 
+import { modelDeploymentConfig } from './app/foundry.bicep'
+
 param mcpServerConfigName string = 'Office-365-Outlook-send-email-only'
 param location string
 @description('Value for the required "Owner" tag applied to all resources.')
 param owner string
 // param tags object = {}
-param managedIdentityPrincipalId string = deployer().objectId
 param deployerPrincipalId string = deployer().objectId
 // param tenantId string = tenant().tenantId
 
@@ -36,6 +37,9 @@ param foundryModelVersion string = '2026-09-29'
 
 @description('Microsoft Foundry deployment capacity.')
 param foundryDeploymentCapacity int = 500
+
+@description('Additional GlobalStandard OpenAI deployments. Names must be unique and distinct from foundryModel.')
+param additionalModelDeployments modelDeploymentConfig[] = []
 
 @description('Optional managed identity client ID to use when authenticating to the Office 365 Outlook MCP server. Leave empty to use the app-wide identity selection.')
 param o365McpClientId string = ''
@@ -78,7 +82,7 @@ module office365Connector 'app/connector-gateway.bicep' = {
     connectorGatewayName: connectorGatewayName
     connectionName: office365ConnectionName
     mcpServerConfigName: mcpServerConfigName
-    managedIdentityPrincipalId: managedIdentityPrincipalId
+    managedIdentityPrincipalId: apiUserAssignedIdentity.outputs.principalId
     deployerPrincipalId: deployerPrincipalId
     tenantId: tenant().tenantId
   }
@@ -180,6 +184,7 @@ module foundry './app/foundry.bicep' = {
     modelName: foundryModelName
     modelVersion: foundryModelVersion
     deploymentCapacity: foundryDeploymentCapacity
+    additionalModelDeployments: additionalModelDeployments
     managedIdentityPrincipalId: apiUserAssignedIdentity.outputs.principalId
     deployerPrincipalId: deployerPrincipalId
   }
@@ -238,6 +243,7 @@ module durableTask 'app/durable-task.bicep' = {
   params: {
     schedulerName: schedulerName
     taskHubName: taskHubName
+    managedIdentityPrincipalId: apiUserAssignedIdentity.outputs.principalId
     location: location
     tags: tags
   }

@@ -1,3 +1,18 @@
+@minLength(1)
+type modelIdentifier = string
+
+@minValue(1)
+type modelCapacity = int
+
+@export()
+@sealed()
+type modelDeploymentConfig = {
+  name: modelIdentifier
+  modelName: modelIdentifier
+  modelVersion: modelIdentifier
+  capacity: modelCapacity
+}
+
 param accountName string
 param projectName string
 param location string = resourceGroup().location
@@ -8,7 +23,18 @@ param modelVersion string = '2025-04-14'
 param deploymentCapacity int = 50
 param managedIdentityPrincipalId string
 param deployerPrincipalId string = ''
-param deployments array = []
+
+@description('Additional GlobalStandard OpenAI deployments. Names must be unique and distinct from modelDeploymentName.')
+param additionalModelDeployments modelDeploymentConfig[] = []
+
+var modelDeployments = concat([
+  {
+    name: modelDeploymentName
+    modelName: modelName
+    modelVersion: modelVersion
+    capacity: deploymentCapacity
+  }
+], additionalModelDeployments)
 
 var cognitiveServicesUserRoleId = 'a97b65f3-24c7-4388-baec-2e87135dc908'
 var cognitiveServicesOpenAiUserRoleId = '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd'
@@ -26,49 +52,7 @@ resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-10-01-preview
     customSubDomainName: accountName
     publicNetworkAccess: 'Enabled'
   }
-
-  // resource foundryProject 'projects@2025-10-01-preview' = {
-  //   name: projectName
-  //   location: location
-  //   identity: {
-  //     type: 'SystemAssigned'
-  //   }
-  //   properties: {
-  //     displayName: projectName
-  //     description: 'Functions Hosted Skills sample project'
-  //   }
-  // }
-
-  // resource foundryModelDeployment 'deployments@2024-10-01' = {
-  //   name: modelDeploymentName
-  //   sku: {
-  //     name: 'GlobalStandard'
-  //     capacity: deploymentCapacity
-  //   }
-  //   properties: {
-  //     model: {
-  //       format: 'OpenAI'
-  //       name: modelName
-  //       version: modelVersion
-  //     }
-  //     versionUpgradeOption: 'OnceNewDefaultVersionAvailable'
-  //     raiPolicyName: 'Microsoft.DefaultV2'
-  //   }
-  // }
 }
-
-// @batchSize(1)
-// resource cognitiveServicesAccountDeployment_5K9aRgiZP 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = [for deployment in deployments: {
-//   parent: foundryAccount
-//   name: deployment.name
-//   properties: {
-//     model: deployment.model
-//   }
-//   sku: contains(deployment, 'sku') ? deployment.sku : {
-//     name: 'Standard'
-//     capacity: 20
-//   }
-// }]
 
 resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-10-01-preview' = {
   parent: foundryAccount
@@ -83,28 +67,28 @@ resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-10-0
   }
 }
 
-// @batchSize(1)
-resource foundryModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = {
+@batchSize(1)
+resource foundryModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = [for deployment in modelDeployments: {
   parent: foundryAccount
-  name: modelDeploymentName
+  name: deployment.name
   // Cognitive Services child writes can contend on the parent account.
   dependsOn: [
     foundryProject
   ]
   sku: {
     name: 'GlobalStandard'
-    capacity: deploymentCapacity
+    capacity: deployment.capacity
   }
   properties: {
     model: {
       format: 'OpenAI'
-      name: modelName
-      version: modelVersion
+      name: deployment.modelName
+      version: deployment.modelVersion
     }
     versionUpgradeOption: 'OnceNewDefaultVersionAvailable'
     raiPolicyName: 'Microsoft.DefaultV2'
   }
-}
+}]
 
 resource foundryCognitiveServicesUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(foundryAccount.id, managedIdentityPrincipalId, cognitiveServicesUserRoleId)
@@ -149,4 +133,4 @@ resource foundryDeployerOpenAiUserRole 'Microsoft.Authorization/roleAssignments@
 output accountName string = foundryAccount.name
 output projectName string =  foundryProject.name
 output projectEndpoint string = '${foundryAccount.properties.endpoints['AI Foundry API']}api/projects/${foundryProject.name}'
-output modelDeploymentName string = foundryModelDeployment.name
+output modelDeploymentName string = foundryModelDeployment[0].name
