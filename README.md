@@ -185,6 +185,31 @@ update `queue_name` in `src/daily-orders.agent.md` to match before publishing.
 The deployment outputs include the namespace name, resource ID, fully qualified
 namespace, and queue name.
 
+The `foundryModel`, `foundryModelName`, `foundryModelVersion`, and
+`foundryDeploymentCapacity` parameters configure the primary model, which
+remains the Function App's `FOUNDRY_MODEL` default. Add other models through
+`additionalModelDeployments` in `infra/main.bicepparam`:
+
+```bicep
+param additionalModelDeployments = [
+  {
+    name: 'gpt-5.4'
+    modelName: 'gpt-5.4'
+    modelVersion: '2026-03-05'
+    capacity: 50
+  }
+]
+```
+
+Omit the list or set it to `[]` to provision only the primary model. Deployment
+names must be unique, including the primary `foundryModel` name. Each additional
+entry requires a model name, version, and positive capacity; all deployments use
+the existing account and `GlobalStandard` SKU and are provisioned sequentially.
+Check model availability and quota in your subscription and region before
+deploying. The example adds `gpt-5.4` for the dad-joke agent while retaining
+`gpt-6.1-sol` as the default; an agent's `model` override selects a deployment
+by name.
+
 Then deploy:
 
 ```bash
