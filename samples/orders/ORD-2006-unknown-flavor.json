@@ -3,7 +3,7 @@
   "customer": {
     "firstName": "Barbara",
     "lastName": "Liskov",
-    "email": "michael.collier@live.com"
+    "email": "barbara.liskov@froyofoundry.example"
   },
   "items": [
     { "requestedQty": 2, "flavorId": "ZZZ" },
