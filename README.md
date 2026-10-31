@@ -43,7 +43,8 @@ Supporting pieces:
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) with Bicep
 - An Azure subscription with a Microsoft Foundry project and a deployed model
-- An Azure Service Bus namespace with an `inbound-orders` queue (for the order agent)
+- An Azure Service Bus namespace with an `inbound-orders` queue for local order-agent runs
+  (the Bicep deployment provisions these resources for Azure)
 - [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite)
   for local storage emulation
 
@@ -170,7 +171,19 @@ param location = 'eastus2'
 param owner = '<your-email>'
 param environmentName = '<environment-name>'
 param existingResourceGroupName = '<resource-group-name>'
+param serviceBusQueueName = 'inbound-orders'
 ```
+
+The deployment provisions a Standard Service Bus namespace and queue, configures
+the Function App's identity-based connection, and grants its managed identity
+the **Azure Service Bus Data Receiver** role on the queue. SAS authentication is
+disabled; message publishers need Entra authentication and their own
+**Azure Service Bus Data Sender** role.
+
+`serviceBusQueueName` defaults to `inbound-orders`. If you override it, also
+update `queue_name` in `src/daily-orders.agent.md` to match before publishing.
+The deployment outputs include the namespace name, resource ID, fully qualified
+namespace, and queue name.
 
 Then deploy:
 
