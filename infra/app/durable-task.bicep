@@ -11,6 +11,9 @@ param schedulerName string
 @description('Name of the Task Hub (3-64 alphanumeric + hyphens).')
 param taskHubName string
 
+@description('Principal ID of the Function App managed identity.')
+param managedIdentityPrincipalId string
+
 @description('Azure region for deployment.')
 param location string = resourceGroup().location
 
@@ -19,6 +22,8 @@ param ipAllowlist string[] = ['0.0.0.0/0']
 
 @description('Resource tags.')
 param tags object = {}
+
+var durableTaskDataContributorRoleDefinitionId = '0ad04412-c4d5-4796-b79c-f76d14c8d402'
 
 // ─── Durable Task Scheduler ─────────────────────────────────────────────────
 resource scheduler 'Microsoft.DurableTask/schedulers@2025-11-01' = {
@@ -38,6 +43,16 @@ resource taskHub 'Microsoft.DurableTask/schedulers/taskHubs@2025-11-01' = {
   parent: scheduler
   name: taskHubName
   properties: {}
+}
+
+resource taskHubDataContributorRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(taskHub.id, managedIdentityPrincipalId, durableTaskDataContributorRoleDefinitionId)
+  scope: taskHub
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', durableTaskDataContributorRoleDefinitionId)
+    principalId: managedIdentityPrincipalId
+    principalType: 'ServicePrincipal'
+  }
 }
 
 // ─── Outputs ────────────────────────────────────────────────────────────────
