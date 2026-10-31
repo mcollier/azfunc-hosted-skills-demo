@@ -72,3 +72,4 @@ infra/main.bicepparam
 core-tools-bug-report.md
 megalinter-reports/
 *.megalinter-setup.bak
+.azure
