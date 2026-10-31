@@ -37,6 +37,9 @@ param foundryModelVersion string = '2026-09-29'
 @description('Microsoft Foundry deployment capacity.')
 param foundryDeploymentCapacity int = 500
 
+@description('Optional managed identity client ID to use when authenticating to the Office 365 Outlook MCP server. Leave empty to use the app-wide identity selection.')
+param o365McpClientId string = ''
+
 
 var tags = { 'azd-env-name': environmentName 
 }
@@ -219,9 +222,9 @@ module api './app/api.bicep' = {
       AZURE_CLIENT_ID: apiUserAssignedIdentity.outputs.clientId
       TO_EMAIL: toEmail
       O365_MCP_SERVER_URL: office365Connector!.outputs.mcpEndpointUrl
-      // O365_MCP_CLIENT_ID: o365McpClientId
+      O365_MCP_CLIENT_ID: o365McpClientId
       ENABLE_MULTIPLATFORM_BUILD: 'true'
-      DURABLE_TASK_SCHEDULER_CONNECTION_STRING: durableTask.outputs.schedulerEndpoint
+      DURABLE_TASK_SCHEDULER_CONNECTION_STRING: 'Endpoint=${durableTask.outputs.schedulerEndpoint};Authentication=ManagedIdentity;ClientId=${apiUserAssignedIdentity.outputs.clientId}'
       SERVICEBUS_CONNECTION__fullyQualifiedNamespace: serviceBusFullyQualifiedNamespace
       SERVICEBUS_CONNECTION__credential: 'managedidentity'
       SERVICEBUS_CONNECTION__clientId: apiUserAssignedIdentity.outputs.clientId
