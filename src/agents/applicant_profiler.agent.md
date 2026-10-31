@@ -20,8 +20,6 @@ Extract only stated information:
 
 Verify that the proposed city and state are consistent with the intended market described elsewhere in the application. Note any mismatch, ambiguity, or unverified claim (for example, no executed lease or exact address).
 
-Verify the proposed location using `azure-maps` MCP tools to get a precise geolocation and confirm the city and state.
-
 Return a concise JSON object with these keys, and nothing else:
 
 ```json
