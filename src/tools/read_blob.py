@@ -22,7 +22,8 @@ def _read_application(blob_name: str) -> tuple[str, str]:
     logger.info("Reading blob: container=%s, blob_name=%s", _CONTAINER, blob_name)
     blob = service.get_blob_client(container=_CONTAINER, blob=blob_name)
 
-    return blob_name, blob.download_blob().content_as_text(encoding="utf-8")
+    # return blob_name, blob.download_blob().content_as_text(encoding="utf-8")
+    return blob_name, blob.download_blob().readall().decode("utf-8")
 
 
 @tool
