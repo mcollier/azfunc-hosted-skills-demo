@@ -230,6 +230,7 @@ module api './app/api.bicep' = {
       O365_MCP_CLIENT_ID: o365McpClientId
       ENABLE_MULTIPLATFORM_BUILD: 'true'
       DURABLE_TASK_SCHEDULER_CONNECTION_STRING: 'Endpoint=${durableTask.outputs.schedulerEndpoint};Authentication=ManagedIdentity;ClientId=${apiUserAssignedIdentity.outputs.clientId}'
+      TASK_HUB_NAME: durableTask.outputs.taskHubName
       SERVICEBUS_CONNECTION__fullyQualifiedNamespace: serviceBusFullyQualifiedNamespace
       SERVICEBUS_CONNECTION__credential: 'managedidentity'
       SERVICEBUS_CONNECTION__clientId: apiUserAssignedIdentity.outputs.clientId
