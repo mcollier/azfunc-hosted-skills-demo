@@ -4,12 +4,12 @@
       "source": {
         "source": "github",
         "repo": "microsoft/azure-skills"
-      },
-      "azure-functions-skills": {
-        "source": {
-          "source": "github",
-          "repo": "Azure/azure-functions-skills"
-        }
+      }
+    },
+    "azure-functions-skills": {
+      "source": {
+        "source": "github",
+        "repo": "Azure/azure-functions-skills"
       }
     }
   },
