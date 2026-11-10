@@ -45,20 +45,40 @@ For example:
 ```json
 {
   "tasks": [
-    { "id": "read_application", "type": "tool", "tool": "read_application_blob",
-      "args": { "blob_name": "applications/application.md" } },
-    { "id": "profile_applicant", "type": "sub_agent", "agent": "applicant_profiler",
+    {
+      "id": "read_application",
+      "type": "tool",
+      "tool": "read_application_blob",
+      "args": { "blob_name": "applications/application.md" }
+    },
+    {
+      "id": "profile_applicant",
+      "type": "sub_agent",
+      "agent": "applicant_profiler",
       "depends_on": ["read_application"],
-      "task": "Profile this franchise application.\n\n${read_application.result.text}" },
-    { "id": "analyze_financials", "type": "sub_agent", "agent": "financial_analyst",
+      "task": "Profile this franchise application.\n\n${read_application.result.text}"
+    },
+    {
+      "id": "analyze_financials",
+      "type": "sub_agent",
+      "agent": "financial_analyst",
       "depends_on": ["read_application"],
-      "task": "Analyze the financials of this franchise application.\n\n${read_application.result.text}" },
-    { "id": "write_assessment", "type": "sub_agent", "agent": "assessment_writer",
+      "task": "Analyze the financials of this franchise application.\n\n${read_application.result.text}"
+    },
+    {
+      "id": "write_assessment",
+      "type": "sub_agent",
+      "agent": "assessment_writer",
       "depends_on": ["profile_applicant", "analyze_financials"],
-      "task": "Build the franchise assessment.\n\nApplicant profile:\n${profile_applicant.result.text}\n\nFinancial analysis:\n${analyze_financials.result.text}" },
-    { "id": "send_assessment", "type": "sub_agent", "agent": "assessment_mailer",
+      "task": "Build the franchise assessment.\n\nApplicant profile:\n${profile_applicant.result.text}\n\nFinancial analysis:\n${analyze_financials.result.text}"
+    },
+    {
+      "id": "send_assessment",
+      "type": "sub_agent",
+      "agent": "assessment_mailer",
       "depends_on": ["write_assessment"],
-      "task": "Subject: Franchise application assessment: applications/application.md\n\nHTML body:\n${write_assessment.result.text}" }
+      "task": "Subject: Franchise application assessment: applications/application.md\n\nHTML body:\n${write_assessment.result.text}"
+    }
   ]
 }
 ```

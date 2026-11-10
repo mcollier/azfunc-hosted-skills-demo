@@ -14,12 +14,12 @@ triggers, Python tools, MCP servers, and reusable skills — from a three-line
 The demo models **Froyo Foundry**, a fictional frozen yogurt company, and ships
 four agents:
 
-| Agent                            | File                        | Trigger                            | What it does                                                                                    |
-| -------------------------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
-| My Agent                         | `src/main.agent.md`         | HTTP chat                          | Minimal "hello world" agent                                                                     |
-| Daily Dad Joke                   | `src/dad-joke.agent.md`     | HTTP chat + debug UI               | Tells dad jokes                                                                                 |
-| Order Fulfillment Decision Agent | `src/daily-orders.agent.md` | `inbound-orders` Service Bus queue | Checks inventory, issues coupons on shortfall, recommends alternatives, and emails the customer |
-| Franchisee Analysis (workflow)   | `src/franchisee-analysis.agent.md` | Blob in `applications/` container | Plans a durable dynamic workflow that profiles the applicant, checks financials, writes an HTML assessment, and emails it |
+| Agent                            | File                               | Trigger                            | What it does                                                                                                              |
+| -------------------------------- | ---------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| My Agent                         | `src/main.agent.md`                | HTTP chat                          | Minimal "hello world" agent                                                                                               |
+| Daily Dad Joke                   | `src/dad-joke.agent.md`            | HTTP chat + debug UI               | Tells dad jokes                                                                                                           |
+| Order Fulfillment Decision Agent | `src/daily-orders.agent.md`        | `inbound-orders` Service Bus queue | Checks inventory, issues coupons on shortfall, recommends alternatives, and emails the customer                           |
+| Franchisee Analysis (workflow)   | `src/franchisee-analysis.agent.md` | Blob in `applications/` container  | Plans a durable dynamic workflow that profiles the applicant, checks financials, writes an HTML assessment, and emails it |
 
 The franchisee workflow uses internal-only subagents in `src/agents/`
 (`applicant_profiler`, `financial_analyst`, `assessment_writer`,
@@ -27,15 +27,15 @@ The franchisee workflow uses internal-only subagents in `src/agents/`
 
 Supporting pieces:
 
-| Path                                     | Purpose                                                                                            |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `src/agents.config.yaml`                 | Shared runtime config (model, timeout)                                                             |
+| Path                                     | Purpose                                                                                                                                                                       |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/agents.config.yaml`                 | Shared runtime config (model, timeout)                                                                                                                                        |
 | `src/tools/`                             | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code`, `check_financials`, `read_blob` / `read_application_blob` (workflow tool) |
-| `src/agents/`                            | Workflow subagents used by the franchisee analysis agent                                           |
-| `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email                                    |
-| `src/mcp.json`                           | Office 365 Outlook MCP server used to send the email                                               |
-| `src/test.http`                          | Ready-to-run requests for the HTTP agents                                                          |
-| `infra/`                                 | Bicep templates for the Azure resources (incl. the O365 connector gateway)                         |
+| `src/agents/`                            | Workflow subagents used by the franchisee analysis agent                                                                                                                      |
+| `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email                                                                                                               |
+| `src/mcp.json`                           | Office 365 Outlook MCP server used to send the email                                                                                                                          |
+| `src/test.http`                          | Ready-to-run requests for the HTTP agents                                                                                                                                     |
+| `infra/`                                 | Bicep templates for the Azure resources (incl. the O365 connector gateway)                                                                                                    |
 
 ## Prerequisites
 
