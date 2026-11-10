@@ -166,7 +166,7 @@ Create an `infra/main.bicepparam` for your environment:
 ```bicep
 using 'main.bicep'
 
-param connectorGatewayName = '<connector-gateway-name>'
+param toEmail = 'recipient@example.com'
 param location = 'eastus2'
 param owner = '<your-email>'
 param environmentName = '<environment-name>'
