@@ -83,7 +83,7 @@ def _scenario(
     }
     if annual_debt_service:
         result["annual_debt_service"] = _round(annual_debt_service)
-        result["dscr"] = round(earnings / annual_debt_service, 2)
+        result["dscr"] = earnings / annual_debt_service
         result["cash_after_debt_service"] = _round(earnings - annual_debt_service)
     return result
 
