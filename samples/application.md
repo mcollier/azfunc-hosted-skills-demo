@@ -34,41 +34,41 @@ Illustrative lease assumptions are $32 per square foot in annual base rent ($56,
 
 Our invented personal financial summary is:
 
-| Item | Amount |
-|---|---:|
-| Total assets | $1,130,000 |
-| Total liabilities | $280,000 |
-| Net worth | $850,000 |
-| Liquid assets before investment | $390,000 |
-| Equity allocated to this project | $260,000 |
-| Personal liquid reserve remaining after equity contribution | $130,000 |
+| Item                                                        |     Amount |
+| ----------------------------------------------------------- | ---------: |
+| Total assets                                                | $1,130,000 |
+| Total liabilities                                           |   $280,000 |
+| Net worth                                                   |   $850,000 |
+| Liquid assets before investment                             |   $390,000 |
+| Equity allocated to this project                            |   $260,000 |
+| Personal liquid reserve remaining after equity contribution |   $130,000 |
 
 The $390,000 in liquid assets is included in total assets. The $130,000 reserve is outside the project's sources-and-uses schedule and is not counted a second time as project funding. No equity comes from a new personal loan in this scenario. No assets, balances, credit history, or source of funds have been independently verified.
 
-| Project funding source | Amount | Status |
-|---|---:|---|
-| Applicant equity | $260,000 | Applicant-stated commitment; evidence pending |
-| Proposed business term loan | $360,000 | Not committed; lender underwriting pending |
-| **Total proposed sources** | **$620,000** | **Conditional financing** |
+| Project funding source      |       Amount | Status                                        |
+| --------------------------- | -----------: | --------------------------------------------- |
+| Applicant equity            |     $260,000 | Applicant-stated commitment; evidence pending |
+| Proposed business term loan |     $360,000 | Not committed; lender underwriting pending    |
+| **Total proposed sources**  | **$620,000** | **Conditional financing**                     |
 
 For sensitivity testing only, assume a fully amortizing $360,000 loan at 10% annual interest over 120 monthly payments. This is an illustrative model, not a lender quote or an approved SBA loan. Fees, guarantees, collateral, variable-rate changes, and closing conditions have not been modeled.
 
 ## 5. Startup uses
 
-| Use | Budget |
-|---|---:|
-| Initial franchise fee assumption | $40,000 |
-| Leasehold improvements, including construction contingency | $210,000 |
-| Machines, refrigeration, toppings line, smallwares | $145,000 |
-| Signage and furniture | $20,000 |
-| POS, networking, security and technology setup | $15,000 |
-| Professional fees and pre-opening administration | $20,000 |
-| Lease/security and utility deposits | $20,000 |
-| Opening inventory and packaging | $15,000 |
-| Training and pre-opening travel | $10,000 |
-| Launch marketing | $25,000 |
-| Project working-capital reserve | $100,000 |
-| **Total startup uses** | **$620,000** |
+| Use                                                        |       Budget |
+| ---------------------------------------------------------- | -----------: |
+| Initial franchise fee assumption                           |      $40,000 |
+| Leasehold improvements, including construction contingency |     $210,000 |
+| Machines, refrigeration, toppings line, smallwares         |     $145,000 |
+| Signage and furniture                                      |      $20,000 |
+| POS, networking, security and technology setup             |      $15,000 |
+| Professional fees and pre-opening administration           |      $20,000 |
+| Lease/security and utility deposits                        |      $20,000 |
+| Opening inventory and packaging                            |      $15,000 |
+| Training and pre-opening travel                            |      $10,000 |
+| Launch marketing                                           |      $25,000 |
+| Project working-capital reserve                            |     $100,000 |
+| **Total startup uses**                                     | **$620,000** |
 
 The construction line includes a $25,000 contingency. The $100,000 project working-capital reserve is included in the startup uses; it is distinct from the personal reserve above. All figures require bids, actual brand requirements and lender review. Franchise fees and ongoing charges are fictional demo assumptions, not terms drawn from a real disclosure document.
 
@@ -76,37 +76,37 @@ The construction line includes a $25,000 contingency. The $100,000 project worki
 
 We project $780,000 in the first full 12 operating months, not a partial calendar year. At an assumed average ticket of $8.50 and 360 operating days, that requires approximately 255 transactions per operating day. No footfall study or comparable-store sales evidence supports that assumption yet.
 
-| Operating month | Sales projection |
-|---|---:|
-| January | $42,000 |
-| February | $44,000 |
-| March | $52,000 |
-| April | $61,000 |
-| May | $75,000 |
-| June | $88,000 |
-| July | $92,000 |
-| August | $84,000 |
-| September | $72,000 |
-| October | $64,000 |
-| November | $56,000 |
-| December | $50,000 |
-| **Annual total** | **$780,000** |
+| Operating month  | Sales projection |
+| ---------------- | ---------------: |
+| January          |          $42,000 |
+| February         |          $44,000 |
+| March            |          $52,000 |
+| April            |          $61,000 |
+| May              |          $75,000 |
+| June             |          $88,000 |
+| July             |          $92,000 |
+| August           |          $84,000 |
+| September        |          $72,000 |
+| October          |          $64,000 |
+| November         |          $56,000 |
+| December         |          $50,000 |
+| **Annual total** |     **$780,000** |
 
 These calendar-month figures describe an illustrative stabilized seasonal pattern. The first full operating year beginning June 2027 would use the same monthly pattern in June-to-May order, without a separate ramp-up adjustment. That optimistic omission should be challenged in review.
 
-| Annual operating item | Assumption | Amount |
-|---|---|---:|
-| Sales | Applicant projection | $780,000 |
-| Product and packaging cost | 28% of sales | $218,400 |
-| Labor and payroll costs | 29% of sales in base case | $226,200 |
-| Occupancy | Base rent plus property/CAM charges | $68,000 |
-| Royalty | 6% fictional assumption | $46,800 |
-| Brand marketing fund | 2% fictional assumption | $15,600 |
-| Utilities | Budget | $24,000 |
-| Insurance and licenses | Budget | $12,000 |
-| Repairs, software and administration | Budget | $22,000 |
-| Ongoing local marketing | Budget, separate from launch marketing | $12,000 |
-| **Operating cash earnings before debt/tax/depreciation** | **Simplified EBITDA proxy** | **$135,000** |
+| Annual operating item                                    | Assumption                             |       Amount |
+| -------------------------------------------------------- | -------------------------------------- | -----------: |
+| Sales                                                    | Applicant projection                   |     $780,000 |
+| Product and packaging cost                               | 28% of sales                           |     $218,400 |
+| Labor and payroll costs                                  | 29% of sales in base case              |     $226,200 |
+| Occupancy                                                | Base rent plus property/CAM charges    |      $68,000 |
+| Royalty                                                  | 6% fictional assumption                |      $46,800 |
+| Brand marketing fund                                     | 2% fictional assumption                |      $15,600 |
+| Utilities                                                | Budget                                 |      $24,000 |
+| Insurance and licenses                                   | Budget                                 |      $12,000 |
+| Repairs, software and administration                     | Budget                                 |      $22,000 |
+| Ongoing local marketing                                  | Budget, separate from launch marketing |      $12,000 |
+| **Operating cash earnings before debt/tax/depreciation** | **Simplified EBITDA proxy**            | **$135,000** |
 
 The simplified earnings figure excludes debt payments, income taxes, depreciation, replacement capital, and changes in working capital. It is not net profit or a lender-approved debt-service calculation. Startup deposits and launch spending are not recurring operating costs in this table.
 
