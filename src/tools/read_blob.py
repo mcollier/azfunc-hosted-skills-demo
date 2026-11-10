@@ -14,7 +14,7 @@ _CONTAINER = "applications"
 
 
 def _read_application(blob_name: str) -> tuple[str, str]:
-    connection_string = os.environ["AzureWebJobsStorage"]
+    connection_string = os.environ["AzureWebJobsStorage"]  # noqa: SIM112 - fixed Functions setting name
     service = BlobServiceClient.from_connection_string(connection_string)
 
     # Blob trigger metadata includes the container name in the path
