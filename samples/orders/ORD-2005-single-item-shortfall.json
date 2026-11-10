@@ -5,7 +5,5 @@
     "lastName": "Hamilton",
     "email": "margaret.hamilton@froyofoundry.example"
   },
-  "items": [
-    { "requestedQty": 25, "flavorId": "MNT" }
-  ]
+  "items": [{ "requestedQty": 25, "flavorId": "MNT" }]
 }
