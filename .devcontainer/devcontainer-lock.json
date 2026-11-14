@@ -29,6 +29,11 @@
       "version": "1.0.1",
       "resolved": "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools@sha256:a8b16ec41e15f0b28e49b831b02361b2519aa000d048e7d4d21e6a3b6486356c",
       "integrity": "sha256:a8b16ec41e15f0b28e49b831b02361b2519aa000d048e7d4d21e6a3b6486356c"
+    },
+    "ghcr.io/stuartleeks/dev-container-features/github-copilot-cli:0": {
+      "version": "0.0.2",
+      "resolved": "ghcr.io/stuartleeks/dev-container-features/github-copilot-cli@sha256:eebfbf183a8c1a2deae72f602410209b546697db230dce80ead95ee362c81c2d",
+      "integrity": "sha256:eebfbf183a8c1a2deae72f602410209b546697db230dce80ead95ee362c81c2d"
     }
   }
 }

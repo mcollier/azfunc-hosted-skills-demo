@@ -12,24 +12,30 @@ triggers, Python tools, MCP servers, and reusable skills — from a three-line
 ## What's in here
 
 The demo models **Froyo Foundry**, a fictional frozen yogurt company, and ships
-three agents:
+four agents:
 
-| Agent                            | File                        | Trigger                            | What it does                                                                                    |
-| -------------------------------- | --------------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
-| My Agent                         | `src/main.agent.md`         | HTTP chat                          | Minimal "hello world" agent                                                                     |
-| Daily Dad Joke                   | `src/dad-joke.agent.md`     | HTTP chat + debug UI               | Tells dad jokes                                                                                 |
-| Order Fulfillment Decision Agent | `src/daily-orders.agent.md` | `inbound-orders` Service Bus queue | Checks inventory, issues coupons on shortfall, recommends alternatives, and emails the customer |
+| Agent                            | File                               | Trigger                            | What it does                                                                                                              |
+| -------------------------------- | ---------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| My Agent                         | `src/main.agent.md`                | HTTP chat                          | Minimal "hello world" agent                                                                                               |
+| Daily Dad Joke                   | `src/dad-joke.agent.md`            | HTTP chat + debug UI               | Tells dad jokes                                                                                                           |
+| Order Fulfillment Decision Agent | `src/daily-orders.agent.md`        | `inbound-orders` Service Bus queue | Checks inventory, issues coupons on shortfall, recommends alternatives, and emails the customer                           |
+| Franchisee Analysis (workflow)   | `src/franchisee-analysis.agent.md` | Blob in `applications/` container  | Plans a durable dynamic workflow that profiles the applicant, checks financials, writes an HTML assessment, and emails it |
+
+The franchisee workflow uses internal-only subagents in `src/agents/`
+(`applicant_profiler`, `financial_analyst`, `assessment_writer`,
+`assessment_mailer`) and the `read_application_blob` workflow tool.
 
 Supporting pieces:
 
-| Path                                     | Purpose                                                                                            |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `src/agents.config.yaml`                 | Shared runtime config (model, timeout)                                                             |
-| `src/tools/`                             | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code` |
-| `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email                                    |
-| `src/mcp.json`                           | Office 365 Outlook MCP server used to send the email                                               |
-| `src/test.http`                          | Ready-to-run requests for the HTTP agents                                                          |
-| `infra/`                                 | Bicep templates for the Azure resources (incl. the O365 connector gateway)                         |
+| Path                                     | Purpose                                                                                                                                                                       |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/agents.config.yaml`                 | Shared runtime config (model, timeout)                                                                                                                                        |
+| `src/tools/`                             | Python tools: `check_inventory`, `get_available_inventory`, `list_flavors`, `generate_coupon_code`, `check_financials`, `read_blob` / `read_application_blob` (workflow tool) |
+| `src/agents/`                            | Workflow subagents used by the franchisee analysis agent                                                                                                                      |
+| `src/skills/order-status-email/SKILL.md` | Hosted skill that composes the customer-facing HTML order email                                                                                                               |
+| `src/mcp.json`                           | Office 365 Outlook MCP server used to send the email                                                                                                                          |
+| `src/test.http`                          | Ready-to-run requests for the HTTP agents                                                                                                                                     |
+| `infra/`                                 | Bicep templates for the Azure resources (incl. the O365 connector gateway)                                                                                                    |
 
 ## Prerequisites
 
@@ -37,7 +43,8 @@ Supporting pieces:
 - [Azure Functions Core Tools v4](https://learn.microsoft.com/azure/azure-functions/functions-run-local)
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) with Bicep
 - An Azure subscription with a Microsoft Foundry project and a deployed model
-- An Azure Service Bus namespace with an `inbound-orders` queue (for the order agent)
+- An Azure Service Bus namespace with an `inbound-orders` queue for local order-agent runs
+  (the Bicep deployment provisions these resources for Azure)
 - [Azurite](https://learn.microsoft.com/azure/storage/common/storage-use-azurite)
   for local storage emulation
 
@@ -129,6 +136,29 @@ recommendations. Stock levels come from the hardcoded catalog in
 Whatever publishes the message needs the **Azure Service Bus Data Sender** role
 on the namespace (or queue).
 
+### 5. Exercise the franchisee analysis workflow
+
+The franchisee agent uses [dynamic workflows](https://learn.microsoft.com/azure/azure-functions/functions-hosted-skills-dynamic-workflows),
+which require a Durable Task Scheduler. Locally, run the emulator and add
+`TASKHUB_NAME` and `DURABLE_TASK_SCHEDULER_CONNECTION_STRING` to
+`local.settings.json`:
+
+```bash
+docker run -d -p 8080:8080 -p 8082:8082 mcr.microsoft.com/dts/dts-emulator:latest
+```
+
+With Azurite and `func start` running, upload the sample application:
+
+```bash
+az storage container create -n applications --connection-string UseDevelopmentStorage=true
+az storage blob upload -c applications -n application.md -f samples/application.md \
+  --connection-string UseDevelopmentStorage=true --overwrite
+```
+
+The agent starts one workflow: `read_application` → (`profile_applicant` ∥
+`analyze_financials`) → `write_assessment` → `send_assessment`. Track it in the
+DTS dashboard at <http://localhost:8082>.
+
 ## Deploying to Azure
 
 Create an `infra/main.bicepparam` for your environment:
@@ -136,12 +166,49 @@ Create an `infra/main.bicepparam` for your environment:
 ```bicep
 using 'main.bicep'
 
-param connectorGatewayName = '<connector-gateway-name>'
+param toEmail = 'recipient@example.com'
 param location = 'eastus2'
 param owner = '<your-email>'
 param environmentName = '<environment-name>'
 param existingResourceGroupName = '<resource-group-name>'
+param serviceBusQueueName = 'inbound-orders'
 ```
+
+The deployment provisions a Standard Service Bus namespace and queue, configures
+the Function App's identity-based connection, and grants its managed identity
+the **Azure Service Bus Data Receiver** role on the queue. SAS authentication is
+disabled; message publishers need Entra authentication and their own
+**Azure Service Bus Data Sender** role.
+
+`serviceBusQueueName` defaults to `inbound-orders`. If you override it, also
+update `queue_name` in `src/daily-orders.agent.md` to match before publishing.
+The deployment outputs include the namespace name, resource ID, fully qualified
+namespace, and queue name.
+
+The `foundryModel`, `foundryModelName`, `foundryModelVersion`, and
+`foundryDeploymentCapacity` parameters configure the primary model, which
+remains the Function App's `FOUNDRY_MODEL` default. Add other models through
+`additionalModelDeployments` in `infra/main.bicepparam`:
+
+```bicep
+param additionalModelDeployments = [
+  {
+    name: 'gpt-5.4'
+    modelName: 'gpt-5.4'
+    modelVersion: '2026-03-05'
+    capacity: 50
+  }
+]
+```
+
+Omit the list or set it to `[]` to provision only the primary model. Deployment
+names must be unique, including the primary `foundryModel` name. Each additional
+entry requires a model name, version, and positive capacity; all deployments use
+the existing account and `GlobalStandard` SKU and are provisioned sequentially.
+Check model availability and quota in your subscription and region before
+deploying. The example adds `gpt-5.4` for the dad-joke agent while retaining
+`gpt-6.1-sol` as the default; an agent's `model` override selects a deployment
+by name.
 
 Then deploy:
 

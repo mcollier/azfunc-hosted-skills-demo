@@ -20,7 +20,8 @@
     ".github/workflows/mega-linter.yml",
     ".prettierignore",
     "package.json",
-    "ruff.toml"
+    "ruff.toml",
+    "**/*.bicep"
   ],
   "language": "en",
   "noConfigSearch": true,
@@ -30,14 +31,18 @@
     "azurefunctions",
     "bicepparam",
     "eastus",
+    "EBITDA",
     "froyo",
     "fulfillable",
+    "Liskov",
     "mcollier",
     "mcpserverconfigs",
     "megalinter",
     "passionfruit",
     "oxsecurity",
-    "sarif"
+    "sarif",
+    "unnegotiated",
+    "smallwares"
   ],
   "dictionaries": ["cpp-compound-words", "en-gb", "fonts", "python"],
   "version": "0.2"

@@ -10,3 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial project setup
+- Franchisee analysis dynamic workflow with `applicant_profiler`, `financial_analyst`,
+  `assessment_writer`, and `assessment_mailer` subagents
+- `check_financials` tool and `read_application_blob` workflow tool

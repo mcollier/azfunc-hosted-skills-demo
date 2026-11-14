@@ -68,7 +68,8 @@ Thumbs.db
 infra/main.bicepparam
 
 # Samples not yet published
-/samples/
+# /samples/
 core-tools-bug-report.md
 megalinter-reports/
 *.megalinter-setup.bak
+.azure

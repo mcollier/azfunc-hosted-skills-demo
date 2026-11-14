@@ -1,0 +1,12 @@
+{
+  "orderId": "ORD-2004",
+  "customer": {
+    "firstName": "Katherine",
+    "lastName": "Johnson",
+    "email": "katherine.johnson@froyofoundry.example"
+  },
+  "items": [
+    { "requestedQty": 9, "flavorId": "CCC" },
+    { "requestedQty": 1, "flavorId": "ACB" }
+  ]
+}

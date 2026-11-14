@@ -1,0 +1,136 @@
+@minLength(1)
+type modelIdentifier = string
+
+@minValue(1)
+type modelCapacity = int
+
+@export()
+@sealed()
+type modelDeploymentConfig = {
+  name: modelIdentifier
+  modelName: modelIdentifier
+  modelVersion: modelIdentifier
+  capacity: modelCapacity
+}
+
+param accountName string
+param projectName string
+param location string = resourceGroup().location
+param tags object = {}
+param modelDeploymentName string = 'gpt-4.1'
+param modelName string = 'gpt-4.1'
+param modelVersion string = '2025-04-14'
+param deploymentCapacity int = 50
+param managedIdentityPrincipalId string
+param deployerPrincipalId string = ''
+
+@description('Additional GlobalStandard OpenAI deployments. Names must be unique and distinct from modelDeploymentName.')
+param additionalModelDeployments modelDeploymentConfig[] = []
+
+var modelDeployments = concat([
+  {
+    name: modelDeploymentName
+    modelName: modelName
+    modelVersion: modelVersion
+    capacity: deploymentCapacity
+  }
+], additionalModelDeployments)
+
+var cognitiveServicesUserRoleId = 'a97b65f3-24c7-4388-baec-2e87135dc908'
+var cognitiveServicesOpenAiUserRoleId = '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd'
+
+resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-10-01-preview' = {
+  name: accountName
+  location: location
+  kind: 'AIServices'
+  sku: {
+    name: 'S0'
+  }
+  tags: tags
+  properties: {
+    allowProjectManagement: true
+    customSubDomainName: accountName
+    publicNetworkAccess: 'Enabled'
+  }
+}
+
+resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-10-01-preview' = {
+  parent: foundryAccount
+  name: projectName
+  location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    displayName: projectName
+    description: 'Functions Hosted Skills sample project'
+  }
+}
+
+@batchSize(1)
+resource foundryModelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = [for deployment in modelDeployments: {
+  parent: foundryAccount
+  name: deployment.name
+  // Cognitive Services child writes can contend on the parent account.
+  dependsOn: [
+    foundryProject
+  ]
+  sku: {
+    name: 'GlobalStandard'
+    capacity: deployment.capacity
+  }
+  properties: {
+    model: {
+      format: 'OpenAI'
+      name: deployment.modelName
+      version: deployment.modelVersion
+    }
+    versionUpgradeOption: 'OnceNewDefaultVersionAvailable'
+    raiPolicyName: 'Microsoft.DefaultV2'
+  }
+}]
+
+resource foundryCognitiveServicesUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(foundryAccount.id, managedIdentityPrincipalId, cognitiveServicesUserRoleId)
+  scope: foundryAccount
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesUserRoleId)
+    principalId: managedIdentityPrincipalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource foundryOpenAiUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(foundryAccount.id, managedIdentityPrincipalId, cognitiveServicesOpenAiUserRoleId)
+  scope: foundryAccount
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesOpenAiUserRoleId)
+    principalId: managedIdentityPrincipalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+resource foundryDeployerCognitiveServicesUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(deployerPrincipalId)) {
+  name: guid(foundryAccount.id, deployerPrincipalId, cognitiveServicesUserRoleId)
+  scope: foundryAccount
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesUserRoleId)
+    principalId: deployerPrincipalId
+    principalType: 'User'
+  }
+}
+
+resource foundryDeployerOpenAiUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(deployerPrincipalId)) {
+  name: guid(foundryAccount.id, deployerPrincipalId, cognitiveServicesOpenAiUserRoleId)
+  scope: foundryAccount
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', cognitiveServicesOpenAiUserRoleId)
+    principalId: deployerPrincipalId
+    principalType: 'User'
+  }
+}
+
+output accountName string = foundryAccount.name
+output projectName string =  foundryProject.name
+output projectEndpoint string = '${foundryAccount.properties.endpoints['AI Foundry API']}api/projects/${foundryProject.name}'
+output modelDeploymentName string = foundryModelDeployment[0].name

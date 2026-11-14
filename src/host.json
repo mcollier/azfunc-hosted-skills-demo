@@ -3,6 +3,13 @@
   "extensions": {
     "http": {
       "routePrefix": ""
+    },
+    "durableTask": {
+      "hubName": "%TASKHUB_NAME%",
+      "storageProvider": {
+        "type": "azureManaged",
+        "connectionStringName": "DURABLE_TASK_SCHEDULER_CONNECTION_STRING"
+      }
     }
   },
   "logging": {
